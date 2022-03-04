@@ -1,0 +1,30 @@
+@startuml
+class enemy
+' class gameManager
+class facility
+class colony
+' class stage
+class item
+class enemyA
+class HP
+
+colony *-- HP
+colony o-- item
+colony *-- facility
+enemy <|-- enemyA
+enemy *-- HP
+facility *-- HP
+' stage o-- enemy
+' stage o-- colony
+
+HP : int HitPoint
+HP : setHP()
+HP : healHP()
+HP : takeDamage()
+HP : isZero()
+enemyA : move()
+' この行はコメントです。
+/'
+ここの間もコメントです
+'/
+@enduml
