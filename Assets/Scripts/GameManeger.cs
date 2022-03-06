@@ -13,6 +13,6 @@ public class GameManeger : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Instantiate((GameObject)Resources.Load("EnemyA"),new Vector3(Random.value * 10 - 5, Random.value * 10 - 5, Random.value * 10- 5),Quaternion.identity);
+        //Instantiate((GameObject)Resources.Load("EnemyA"),new Vector3(Random.value * 10 - 5, Random.value * 10 - 5, Random.value * 10- 5),Quaternion.identity);
     }
 }
