@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Harpoon : MonoBehaviour
 {
+    private int damage;
     // Start is called before the first frame update
     void Start()
     {
@@ -11,7 +12,7 @@ public class Harpoon : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         transform.position += new Vector3(-1, 0, 0) * Time.deltaTime;
     }
@@ -19,6 +20,5 @@ public class Harpoon : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D other)
     {
         Destroy(this.gameObject);
-        Debug.Log("hoge");
     }
 }

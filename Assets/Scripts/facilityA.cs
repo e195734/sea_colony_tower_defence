@@ -4,6 +4,11 @@ using UnityEngine;
 
 public class facilityA : MonoBehaviour
 {
+    private float lastBulletFireElapsedTime = 0;
+    private float fireInterval = 1;
+    private HP hp = new HP(10);
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -11,8 +16,14 @@ public class facilityA : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
-        Instantiate((GameObject)Resources.Load("Harpoon"),transform.position, Quaternion.identity);
+        this.lastBulletFireElapsedTime += Time.deltaTime;
+        if(lastBulletFireElapsedTime >= fireInterval)
+        {
+            lastBulletFireElapsedTime -= fireInterval;
+            Instantiate((GameObject)Resources.Load("Harpoon"), transform.position, Quaternion.identity);
+        }
+        
     }
 }

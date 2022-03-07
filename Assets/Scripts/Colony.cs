@@ -2,35 +2,27 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyA : MonoBehaviour
+public class Colony : MonoBehaviour
 {
-    private HP hp = new HP(5);
-
+    private HP hp = new HP(20);
     // Start is called before the first frame update
     void Start()
     {
         
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
-    private void FixedUpdate()
-    {
-        transform.position += new Vector3(1, 0, 0) * Time.deltaTime;
-    }
     private bool isDeath()
     {
         return this.hp.isZero();
     }
+
+    // Update is called once per frame
+    void FixedUpdate(){}
     private void OnTriggerEnter2D(Collider2D collision)
     {
         this.hp.damage(5);
         if (isDeath())
         {
+            Debug.Log("GameOver");
             Destroy(this.gameObject);
         }
     }

@@ -1,0 +1,8 @@
+@startuml
+GameManager -> GameManager : 敵の作成
+GameManager -> 
+Enemy -> 
+facility ->
+bullet ->
+
+@enduml
