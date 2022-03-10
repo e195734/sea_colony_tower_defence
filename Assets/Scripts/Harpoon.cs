@@ -5,6 +5,7 @@ using UnityEngine;
 public class Harpoon : MonoBehaviour
 {
     private int damage;
+    private int speed = 3;
     // Start is called before the first frame update
     void Start()
     {
@@ -14,7 +15,7 @@ public class Harpoon : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        transform.position += new Vector3(-1, 0, 0) * Time.deltaTime;
+        this.transform.position -= this.transform.right * Time.deltaTime * speed;
     }
 
     private void OnTriggerEnter2D(Collider2D other)
