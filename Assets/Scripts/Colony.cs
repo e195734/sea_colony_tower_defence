@@ -19,7 +19,10 @@ public class Colony : MonoBehaviour
     void FixedUpdate(){}
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        this.hp.damage(5);
+        if (collision.CompareTag("Enemy"))
+        {
+            this.hp.damage(5);
+        }
         if (isDeath())
         {
             Debug.Log("GameOver");

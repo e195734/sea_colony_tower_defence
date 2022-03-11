@@ -32,7 +32,10 @@ public class EnemyA : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        this.hp.damage(5);
+        if (collision.CompareTag("Colony")||collision.CompareTag("Bullet"))
+        {
+            this.hp.damage(5);
+        }
         if (isDeath())
         {
             Destroy(this.gameObject);

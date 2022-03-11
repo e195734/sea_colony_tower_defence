@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Colony
   - Enemy
+  - Bullet
   layers:
   - Default
   - TransparentFX

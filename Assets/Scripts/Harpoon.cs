@@ -6,6 +6,8 @@ public class Harpoon : MonoBehaviour
 {
     private int damage;
     private int speed = 3;
+    private float lifeTime = 0;
+    private float lifeTimeLimit = 5f;
     // Start is called before the first frame update
     void Start()
     {
@@ -16,10 +18,18 @@ public class Harpoon : MonoBehaviour
     void FixedUpdate()
     {
         this.transform.position -= this.transform.right * Time.deltaTime * speed;
+        this.lifeTime += Time.deltaTime;
+        if (lifeTime >= this.lifeTimeLimit)
+        {
+            Destroy(this.gameObject);
+        }
     }
 
-    private void OnTriggerEnter2D(Collider2D other)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        Destroy(this.gameObject);
+        if (collision.CompareTag("Enemy"))
+        {
+            Destroy(this.gameObject);
+        }
     }
 }
