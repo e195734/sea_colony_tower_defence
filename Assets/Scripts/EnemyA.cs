@@ -23,7 +23,8 @@ public class EnemyA : MonoBehaviour
     {
         if (target)
         {
-            transform.position = Vector2.MoveTowards(transform.position, target.transform.position, speed * Time.deltaTime);
+            this.transform.position = Vector2.MoveTowards(transform.position, target.transform.position, speed * Time.deltaTime);
+            this.transform.rotation = Quaternion.FromToRotation(-Vector3.right, target.transform.position - this.transform.position);
         }
     }
     private bool isDeath()

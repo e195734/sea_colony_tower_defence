@@ -25,7 +25,6 @@ public class GameManeger : MonoBehaviour
 
     private void waveInit()
     {
-        Debug.Log("Instatiate");
         for (int i = 0; i < 3; i++)
         {
             Instantiate((GameObject)Resources.Load("EnemyA"),
