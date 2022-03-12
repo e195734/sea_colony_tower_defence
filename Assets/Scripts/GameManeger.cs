@@ -28,7 +28,7 @@ public class GameManeger : MonoBehaviour
         for (int i = 0; i < 3; i++)
         {
             Instantiate((GameObject)Resources.Load("EnemyA"),
-                        new Vector2(Random.Range(-1.0f, 1.0f), Random.Range(-1.0f, 1.0f)).normalized * 5,
+                        new Vector2(Random.Range(-1.0f, 1.0f), Random.Range(-1.0f, 1.0f)).normalized * 10,
                         Quaternion.identity);
         }
     }

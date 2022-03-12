@@ -1,6 +1,6 @@
 using System;
 
-class HP
+public class HP
 {
     private int initialHP;
     private int hp;
