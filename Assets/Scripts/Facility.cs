@@ -9,6 +9,7 @@ public class Facility : MonoBehaviour
     protected HP hp;
     protected GameObject target;
     protected float targettingRadius;
+    protected GameObject HPBar;
 
     // Start is called before the first frame update
     void Start()
@@ -16,6 +17,9 @@ public class Facility : MonoBehaviour
         this.fireInterval = 1;
         this.hp = new HP(10);
         this.targettingRadius = 10;
+        this.HPBar = Instantiate((GameObject)Resources.Load("HPBar"),
+                                 transform.position,
+                                 Quaternion.identity);
     }
 
     void FixedUpdate()
@@ -28,6 +32,24 @@ public class Facility : MonoBehaviour
             fireing();
         }
 
+    }
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Enemy"))
+        {
+            int atk = collision.gameObject.GetComponent<Enemy>().getAttack();
+            this.hp.damage(atk);
+            this.HPBar.gameObject.GetComponent<HPBar>().updateHP(this.hp.getHPRatio());
+        }
+        if (isDeath())
+        {
+            Destroy(this.gameObject);
+        }
+    }
+
+    private bool isDeath()
+    {
+        return this.hp.isZero();
     }
 
     private void getNearestTarget()//特定範囲で一番近い敵をロック。基本的にはロックは一度かかると外れない。
@@ -56,5 +78,10 @@ public class Facility : MonoBehaviour
         {
             Instantiate((GameObject)Resources.Load("Harpoon"), transform.position, Quaternion.FromToRotation(-Vector3.right, target.transform.position - this.transform.position));
         }
+    }
+
+    private void OnDestroy()
+    {
+        Destroy(this.HPBar.gameObject);
     }
 }

@@ -7,6 +7,7 @@ TagManager:
   - Colony
   - Enemy
   - Bullet
+  - Facility
   layers:
   - Default
   - TransparentFX

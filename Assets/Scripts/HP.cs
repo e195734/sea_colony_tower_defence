@@ -1,4 +1,7 @@
 using System;
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
 
 public class HP
 {
@@ -24,5 +27,10 @@ public class HP
     public void heal(int amount)
     {
         this.hp = Math.Min(this.hp + amount, this.initialHP);
+    }
+
+    public float getHPRatio()
+    {
+        return (float)this.hp / (float)this.initialHP;
     }
 }
