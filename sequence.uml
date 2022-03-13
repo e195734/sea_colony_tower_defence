@@ -1,8 +1,30 @@
 @startuml
-GameManager -> GameManager : 敵の作成
-GameManager -> 
-Enemy -> 
-facility ->
-bullet ->
+alt GameManager.FixedUpdate()
+    GameManager -> GameManager : 経過時間を追加
+    GameManager -> Enemy : インスタンス化。敵を生成。\n Gamemanager.waveInit()
+end
+alt Enemy.FixedUpdate()
+    Enemy -> Enemy : 移動
+    Enemy -> Enemy : 衝突判定
+    alt 弾が衝突していたら
+        Enemy -> Bullet : 攻撃力を取得。Bullet.getAttack()
+        Enemy <- Bullet : 攻撃力を返す。
+        Enemy -> HP : ダメージ判定
+        Enemy -> HPBar : HP表示更新
+    else コロニーか私鉄が衝突していたら
+        Enemy -> Enemy : Destroy(this)
+    else HPが0だったら : isDeath()
+        Enemy -> Enemy : Destroy(this)
+    end
+end
+Bullet 
+
+
+
+/' Facility
+Bullet
+Colony
+HP
+HPBar '/
 
 @enduml
