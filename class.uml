@@ -1,28 +1,87 @@
 @startuml
-class enemy
-' class gameManager
-class facility
-class colony
-' class stage
-class item
-class enemyA
-class HP
+class GameManager{
+    float wavePassedtime
+    float waveInterval
+    FixedUpdate()
+    waveInit()
+}
+class Enemy{
+    HP hp;
+    float moveSpeed;
+    GameObject target;
+    int attack;
+    GameObject HPBar; 
+    void Start()
+    void FixedUpdate()
+    void OnTriggerEnter2D(Collider2D)
+    bool isDeath()
+    int getAttack() 
+    void onDestroy()
+}
+class EnemyA
+class Facility{
+    float lastBulletFireElapsedTime
+    float fireInterval
+    HP hp
+    GameObject target
+    float targettingRadius
+    GameObject HPBar
+    void Start()
+    void FixedUpdate()
+    void OnTriggerEnter2D(Collider2D)
+    bool isDeath()
+    void getNearestTarget()
+    void fireing()
+    void OnDestroy()
+}
+class FacilityA
+class Bullet{
+    int attack
+    float moveSpeed
+    float lifeTime
+    float lifeTimeLimit
+    void Start()
+    void FixedUpdate()
+    void OnTriggerEnter2D(Collider2D)
+    int getAttack()
+}
+class Harpoon
+class Colony{
+    HP hp
+    GameObject HPBar
+    void Start()
+    void Init()
+    void FixedUpdate()
+    void OnTriggerEnter2D(Collider2D)
+    void OnDestroy()
+    bool isDeath()
+}
+class HP{
+    int initialHP
+    int hp
+    bool isZero()
+    void damage()
+    void heal()
+    void getHPRatio()
+}
+class HPBar{
+    updateHP()
+    updatePosition()
+}
 
-colony *-- HP
-colony o-- item
-colony *-- facility
-enemy <|-- enemyA
-enemy *-- HP
-facility *-- HP
-' stage o-- enemy
-' stage o-- colony
+Enemy <|-- EnemyA
+Facility <|-- FacilityA
+Bullet <|-- Harpoon
 
-HP : int HitPoint
-HP : setHP()
-HP : healHP()
-HP : takeDamage()
-HP : isZero()
-enemyA : move()
+Colony *-- HP
+Colony *-- HPBar
+Enemy *-- HP
+Enemy *-- HPBar
+Facility *-- HP
+Facility *-- HPBar
+' Facility o-- Bullet
+
+' Colony o-- Item
 ' この行はコメントです。
 /'
 ここの間もコメントです

@@ -1,8 +1,47 @@
 @startuml
-GameManager -> GameManager : 敵の作成
-GameManager -> 
-Enemy -> 
-facility ->
-bullet ->
-
+participant GameManager
+participant Colony
+participant Enemy
+participant Bullet
+participant HP
+participant HPBar
+alt GameManager.FixedUpdate()
+    GameManager -> GameManager : 経過時間を追加
+    GameManager -> Enemy : インスタンス化。敵を生成。\n Gamemanager.waveInit()
+end
+alt OnTriggerEnter2D(Collider2D)
+    alt 敵と衝突していたら
+        Colony -> Enemy : 攻撃力を取得。Bullet.getAttack()
+        Colony <- Enemy : 攻撃力を返す。
+        Colony -> HP : ダメージ判定
+        Colony -> HPBar : HP表示更新
+    end
+end
+alt Enemy.FixedUpdate()
+    Enemy -> Enemy : 移動
+else OnTriggerEnter2D(Collider2D)
+    Enemy -> Enemy : 衝突判定
+    alt 弾が衝突していたら
+        Enemy -> Bullet : 攻撃力を取得。Bullet.getAttack()
+        Enemy <- Bullet : 攻撃力を返す。
+        Enemy -> HP : ダメージ判定
+        Enemy -> HPBar : HP表示更新
+    else コロニーか施設が衝突していたら
+        Enemy -> Enemy : Destroy(this)
+    else HPが0だったら : isDeath()
+        Enemy -> Enemy : Destroy(this)
+    end
+end
+alt Bullet.FixedUpdate()
+    Bullet -> Bullet : 移動
+else OnTriggerEnter2D(Collider2D)
+    alt lifeTimeを超えている場合
+        Bullet -> Bullet : Destroy(this)
+    end
+    alt 接触判定
+        alt 敵と衝突していたら
+            Bullet -> Bullet : Destroy(this)
+        end
+    end
+end
 @enduml

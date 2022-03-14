@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class GameManeger : MonoBehaviour
 {
+    private float wavePassedtime = 0;
+    private float waveInterval = 3f;
     // Start is called before the first frame update
     void Start()
     {
@@ -11,8 +13,23 @@ public class GameManeger : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
-        //Instantiate((GameObject)Resources.Load("EnemyA"),new Vector3(Random.value * 10 - 5, Random.value * 10 - 5, Random.value * 10- 5),Quaternion.identity);
+        wavePassedtime += Time.deltaTime;
+        if(wavePassedtime >= waveInterval)
+        {
+            wavePassedtime -= waveInterval;
+            waveInit();
+        }
+    }
+
+    private void waveInit()
+    {
+        for (int i = 0; i < 3; i++)
+        {
+            Instantiate((GameObject)Resources.Load("EnemyA"),
+                        new Vector2(Random.Range(-1.0f, 1.0f), Random.Range(-1.0f, 1.0f)).normalized * 10,
+                        Quaternion.identity);
+        }
     }
 }
