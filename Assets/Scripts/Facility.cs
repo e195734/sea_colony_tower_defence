@@ -29,7 +29,7 @@ public class Facility : MonoBehaviour
         {
             lastBulletFireElapsedTime -= fireInterval;
             getNearestTarget();
-            fireing();
+            firing();
         }
 
     }
@@ -58,8 +58,8 @@ public class Facility : MonoBehaviour
         GameObject tmpMinObject = null;
         if (!this.target)
         {
-            GameObject[] enemys = GameObject.FindGameObjectsWithTag("Enemy");
-            foreach (GameObject obj in enemys)
+            GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
+            foreach (GameObject obj in enemies)
             {
                 float tmpDistance = Vector3.Distance(transform.position, obj.transform.position);
                 if (tmpMinDistance > tmpDistance)
@@ -72,11 +72,13 @@ public class Facility : MonoBehaviour
         }
     }
 
-    private void fireing()
+    private void firing()
     {
         if (this.target)
         {
-            Instantiate((GameObject)Resources.Load("Harpoon"), transform.position, Quaternion.FromToRotation(-Vector3.right, target.transform.position - this.transform.position));
+            Instantiate((GameObject)Resources.Load("Harpoon"),
+                        transform.position,
+                        Quaternion.FromToRotation(-Vector3.right, target.transform.position - this.transform.position));
         }
     }
 

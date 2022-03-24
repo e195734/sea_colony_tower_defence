@@ -1,35 +1,54 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class GameManeger : MonoBehaviour
 {
-    private float wavePassedtime = 0;
-    private float waveInterval = 3f;
+    private float wavePassedTime = 0;
+    private WaveManager waveManager;
+
+
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        string jsonString = (Resources.Load("wavesData", typeof(TextAsset)) as TextAsset).text;
+        this.waveManager = new WaveManager(jsonString);
+        this.waveManager.setWaveType("default");
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
-        wavePassedtime += Time.deltaTime;
-        if(wavePassedtime >= waveInterval)
+        wavePassedTime += Time.deltaTime;
+        List<WaveManagerData.Enemy> spawnData = this.waveManager.getSpawnData(Time.deltaTime);
+        if (spawnData != null)
         {
-            wavePassedtime -= waveInterval;
-            waveInit();
+            spawnEnemy(spawnData);
+        }
+    }
+    
+    private void spawnEnemy(List<WaveManagerData.Enemy> enemies)
+    {
+        for(int i = 0; i < enemies.Count; i++)
+        {
+            WaveManagerData.Enemy enemy = enemies[i];
+            for(int j = 0; j < enemy.enemyCount; j++)
+            {
+                Instantiate(createSpawnEnemyObject(enemy.enemyName),
+                            getSpawnPosition(),
+                            Quaternion.identity);
+            }
+
         }
     }
 
-    private void waveInit()
+    private Vector2 getSpawnPosition()
     {
-        for (int i = 0; i < 3; i++)
-        {
-            Instantiate((GameObject)Resources.Load("EnemyA"),
-                        new Vector2(Random.Range(-1.0f, 1.0f), Random.Range(-1.0f, 1.0f)).normalized * 10,
-                        Quaternion.identity);
-        }
+        return new Vector2(Random.Range(-1.0f, 1.0f), Random.Range(-1.0f, 1.0f)).normalized * 10;
+    }
+
+    private GameObject createSpawnEnemyObject(string name)
+    {
+        return (GameObject)Resources.Load(name);
     }
 }
