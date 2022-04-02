@@ -21,10 +21,6 @@ public class Enemy : MonoBehaviour
                                  Quaternion.identity);
     }
 
-    private void Update()
-    {
-    }
-
     private void FixedUpdate()
     {
         if (target)

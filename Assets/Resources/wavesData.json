@@ -1,0 +1,35 @@
+{
+    "enemySpawnData" : [
+        {
+            "gameType" : "default",
+            "wave" : [
+                {
+                    "name" : "wave1",
+                    "duration" : 60,
+                    "spawnTable" : [
+                        {
+                            "time" : 3,
+                            "enemy" : [
+                                {
+                                    "enemyName" : "EnemyA",
+                                    "enemyCount" : 100,
+                                    "spawnAlgorism" : "circle"
+                                }
+                            ]
+                        },
+                        {
+                            "time" : 6,
+                            "enemy" : [
+                                {
+                                    "enemyName" : "EnemyA",
+                                    "enemyCount" : 10,
+                                    "spawnAlgorism" : "circle"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}
